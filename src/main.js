@@ -5,6 +5,19 @@ import store from './store'
 
 Vue.config.productionTip = false
 
+// 引入 vant
+import Vant from 'vant';
+import 'vant/lib/index.css';
+
+// 引入 px 转 rem
+import 'amfe-flexible'
+
+// 引入重置样式
+import 'normalize.css'
+
+
+Vue.use(Vant);
+
 new Vue({
   router,
   store,
