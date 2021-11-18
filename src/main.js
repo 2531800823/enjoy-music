@@ -15,6 +15,9 @@ import 'amfe-flexible'
 // 引入重置样式
 import 'normalize.css'
 
+import { Toast } from 'vant';
+
+Vue.use(Toast);
 
 Vue.use(Vant);
 

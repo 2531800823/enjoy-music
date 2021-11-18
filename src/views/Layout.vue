@@ -1,6 +1,9 @@
 <template>
   <div class="layou-container">
-    <RouterView />
+    <!-- 搜索框 -->
+    <van-search v-model="keywords" placeholder="请输入关键字搜索" />
+    <!-- /搜索框 -->
+    <router-view />
 
     <van-tabbar
       v-model="active"
@@ -17,10 +20,8 @@
       <van-tabbar-item icon="shopping-cart-o" to="/shop"
         >购物车</van-tabbar-item
       >
-      <van-tabbar-item icon="manager-o" to="/user"
-        >我</van-tabbar-item
-      > </van-tabbar
-    >o
+      <van-tabbar-item icon="manager-o" to="/user">我</van-tabbar-item>
+    </van-tabbar>
   </div>
 </template>
 
@@ -30,6 +31,7 @@ export default {
   data() {
     return {
       active: 0,
+      keywords: "",
     };
   },
   methods: {},
