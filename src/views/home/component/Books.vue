@@ -52,6 +52,7 @@
             v-for="item in shopData"
             :key="item.id"
             :item="item"
+            :id="item.id"
           />
         </div>
       </van-list>

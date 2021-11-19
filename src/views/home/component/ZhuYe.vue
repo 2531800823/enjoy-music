@@ -7,7 +7,7 @@
       :autoplay="4000"
       indicator-color="#007aff"
     >
-      <van-swipe-item v-for="item in lunData" :key="item.sequence">
+      <van-swipe-item v-for="(item, index) in lunData" :key="index">
         <img class="limgs" :src="item.image" alt="" />
       </van-swipe-item>
     </van-swipe>
@@ -32,7 +32,7 @@
       :autoplay="3000"
       indicator-color="#007aff"
     >
-      <van-swipe-item v-for="item in swipeList" :key="item.sequence">
+      <van-swipe-item v-for="(item, index) in swipeList" :key="index">
         <img class="limgs-two" :src="item.image" alt="" />
       </van-swipe-item>
     </van-swipe>
@@ -45,7 +45,12 @@
         :src="timeList[0] && timeList[0].configure.imageUrl"
         alt=""
       />
-      <div class="tuwen" v-for="item in timeData" :key="item.id">
+      <div
+        class="tuwen"
+        v-for="item in timeData"
+        :key="item.id"
+        @click="toProduct(item.productId)"
+      >
         <img :src="item.thumbnail" alt="" />
         <div class="wen">
           <h3>{{ item.productName }}号</h3>
@@ -69,6 +74,7 @@
           v-for="item in q.children"
           :key="item.id"
           :item="item"
+          :id="item.id"
         />
       </div>
     </div>
@@ -146,6 +152,11 @@ export default {
         // console.log(res);
         this.timeList[index].children = res.result.datalist;
       });
+    },
+    // 跳转详情页
+    toProduct(id) {
+      console.log(id);
+      this.$router.push("/product/" + id);
     },
   },
   computed: {

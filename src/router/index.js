@@ -76,6 +76,10 @@ const routes = [
       title: '会员登录-享乐音乐商城'
     },
     component: () => import('@/views/login/')
+  },
+  {
+    path: '/product/:id',
+    component: () => import('@/views/xiangqing/')
   }
 
 ]
@@ -86,7 +90,7 @@ const router = new VueRouter({
 
 
 router.beforeEach((to, from, next) => {
-  document.title = to.meta?.title
+  document.title = to.meta?.title || '享乐音乐商城'
   if (to.meta?.isShow) {
     next("/login")
   } else {

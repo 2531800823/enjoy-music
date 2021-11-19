@@ -15,7 +15,14 @@ import 'amfe-flexible'
 // 引入重置样式
 import 'normalize.css'
 
+// 导入自定义插件
+import component from '@/components/'
+
+
 import { Toast } from 'vant';
+
+// 注册自定义插件
+Vue.use(component)
 
 Vue.use(Toast);
 

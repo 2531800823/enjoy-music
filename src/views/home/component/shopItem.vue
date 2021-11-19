@@ -1,5 +1,5 @@
 <template>
-  <div class="item">
+  <div class="item" @click="toProduct">
     <img class="zhu" :src="item.cover" alt="" />
     <div class="zhanwei"></div>
     <h3>{{ item.title }}</h3>
@@ -22,6 +22,12 @@ export default {
     item: {
       type: Object,
       required: true,
+    },
+    id: {},
+  },
+  methods: {
+    toProduct() {
+      this.$router.push("/product/" + this.id);
     },
   },
 };
