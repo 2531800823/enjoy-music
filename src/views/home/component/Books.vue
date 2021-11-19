@@ -49,8 +49,8 @@
         <div class="shuju">
           <ShopItem
             class="item"
-            v-for="item in shopData"
-            :key="item.id"
+            v-for="(item, index) in shopData"
+            :key="index"
             :item="item"
             :id="item.id"
           />
@@ -68,8 +68,14 @@ export default {
     ShopItem,
   },
   async created() {
-    this.id = this.$route.params.id;
-    await this.getList();
+    this.id = this.$route.params.id || 0;
+    if (isNaN(this.$route.params.id - 0)) {
+      console.log(this.$route.params.id);
+      this.dataId = this.$route.params.id.replace("-", ",");
+    } else if (this.$route.params.id) {
+      console.log(1);
+      await this.getList();
+    }
     this.getShopList();
   },
   data() {
@@ -92,8 +98,14 @@ export default {
   methods: {
     async getList() {
       const { result } = await getHomeList(this.id);
-      this.tabs = result.modules[3].datalist;
-      this.dataId = result.modules[3].datalist[0].category[0];
+      console.log(result);
+      try {
+        this.tabs = result.modules[3].datalist;
+        this.dataId = result.modules[3].datalist[0].category[0];
+      } catch (error) {
+        this.$router.push("/");
+      }
+
       //   console.log(this.tabs);
     },
     //   修改销量
@@ -138,6 +150,7 @@ export default {
         status: 1,
         limit: 8,
         page: this.page,
+        keywords: this.$route.query.keywords,
       });
       if (!result?.datalist) {
         this.loading = false;
@@ -149,7 +162,10 @@ export default {
     },
     // 加载数
     onLoad() {
-      if (this.dataId === 0) return (this.loading = false);
+      console.log(this.dataId);
+      if (this.dataId == 0 && this.$route.path !== "/search") {
+        return (this.loading = false);
+      }
       this.getShopList();
     },
     // 修改tabs 改变id 重新获取数据
@@ -168,7 +184,9 @@ export default {
   watch: {
     async $route(val, old) {
       this.id = this.$route.params.id;
-      await this.getList();
+      if (this.$route.params.id) {
+        await this.getList();
+      }
       this.finished = false;
       this.page = 1;
       this.active = 0;

@@ -66,7 +66,16 @@ const routes = [
           title: '唱片-分类-享乐音乐商城'
         },
         component: () => import('@/views/category/')
-      }
+      },
+      {
+        path: 'search',
+        name: "Search",
+
+        meta: {
+          title: '商品搜索-享乐音乐商城'
+        },
+        component: () => import('@/views/search/')
+      },
     ]
   },
   {

@@ -3,7 +3,7 @@
     <!-- 头部 滚动300 显示 -->
     <van-nav-bar
       v-show="isShow"
-      title="标题"
+      title="商品详情"
       left-arrow
       border
       @click-left="onClickLeft"

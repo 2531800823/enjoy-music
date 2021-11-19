@@ -1,7 +1,11 @@
 <template>
   <div class="layou-container">
     <!-- 搜索框 -->
-    <van-search v-model="keywords" placeholder="请输入关键字搜索" />
+    <van-search
+      v-model="keywords"
+      @search="$router.push('/search?keywords=' + keywords)"
+      placeholder="请输入关键字搜索"
+    />
     <!-- /搜索框 -->
     <router-view />
 
@@ -31,10 +35,15 @@ export default {
   data() {
     return {
       active: 0,
-      keywords: "",
+      keywords: this.$route.query.keywords || "",
     };
   },
   methods: {},
+  watch: {
+    $route() {
+      this.keywords = this.$route.query.keywords;
+    },
+  },
 };
 </script>
 

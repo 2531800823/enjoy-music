@@ -7,7 +7,11 @@
       :autoplay="4000"
       indicator-color="#007aff"
     >
-      <van-swipe-item v-for="(item, index) in lunData" :key="index">
+      <van-swipe-item
+        @click="toShop(item.url)"
+        v-for="(item, index) in lunData"
+        :key="index"
+      >
         <img class="limgs" :src="item.image" alt="" />
       </van-swipe-item>
     </van-swipe>
@@ -157,6 +161,11 @@ export default {
     toProduct(id) {
       console.log(id);
       this.$router.push("/product/" + id);
+    },
+    toShop(val) {
+      console.log(val);
+      var arr = val.split("/");
+      this.$router.push("/product/" + arr[arr.length - 1]);
     },
   },
   computed: {

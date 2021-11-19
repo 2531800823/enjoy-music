@@ -7,7 +7,7 @@
           :title="item.name"
           v-for="item in dataList"
           :key="item.id"
-          >{{ 11 }}
+        >
         </van-sidebar-item>
       </van-sidebar>
     </div>
@@ -31,8 +31,13 @@
               >{{ item.name }}</van-divider
             >
             <div class="item2" v-if="item.list.length > 0">
-              <div class="item3" v-for="item2 in item.list" :key="item2.id">
-                <img :src="item2.logo.img" alt="" />
+              <div
+                class="item3"
+                v-for="item2 in item.list"
+                @click="toSearch(item2)"
+                :key="item2.id"
+              >
+                <img :src="item2.logo && item2.logo.img" alt="" />
                 <p>{{ item2.name }}</p>
               </div>
             </div>
@@ -49,16 +54,26 @@
               >品牌</van-divider
             >
             <div class="item2" v-if="q.brandList.length > 0">
-              <div class="item3" v-for="item2 in q.brandList" :key="item2.id">
-                <img :src="item2.logo.img" alt="" />
+              <div
+                class="item3"
+                @click="toSearch(item2)"
+                v-for="item2 in q.brandList"
+                :key="item2.id"
+              >
+                <img :src="item2.logo && item2.logo.img" alt="" />
                 <p>{{ item2.name }}</p>
               </div>
             </div>
           </div>
 
           <div class="teshu" v-if="q.children && q.children.length > 0">
-            <div class="item3" v-for="item2 in q.children" :key="item2.id">
-              <img :src="item2.logo.img" alt="" />
+            <div
+              class="item3"
+              v-for="item2 in q.children"
+              :key="item2.id"
+              @click="toSearch(item2)"
+            >
+              <img :src="item2.logo && item2.logo.img" alt="" />
               <p>{{ item2.name }}</p>
             </div>
           </div>
@@ -86,6 +101,9 @@ export default {
     async getList() {
       const { result } = await getCategroy();
       this.dataList = result;
+    },
+    toSearch(val) {
+      console.log(val);
     },
   },
 };
